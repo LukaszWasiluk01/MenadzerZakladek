@@ -9,7 +9,10 @@ Projekt indywidualny "Menadżer zakładek" wykonany na przedmiot "Podstawy techn
 
 1. Uruchom XAMPP Control Panel
 1. Naciśnij przycisk z napisem "Explorer", który otworzy eksplorator plików
-1. Odszukaj katalog htdocs i umieść w nim folder z aplikacją webową (menedzerZakladek)
+1. Odszukaj katalog htdocs i sklonuj repozytorium z projektem za pomocą komendy:
+```bash
+git clone https://github.com/LukaszWasiluk01/MenadzerZakladek.git
+```
 
 # Instrukcja przygotowania systemu bazodanowego
 
@@ -20,10 +23,15 @@ Projekt indywidualny "Menadżer zakładek" wykonany na przedmiot "Podstawy techn
 1. Utwórz bazę danych o nazwie "zakladkidb" i ustaw kodowanie na utf8_polish_ci
 1. Następnie z menu na górze panelu wybierz "import"
 1. Wybierz plik "zakladkidb.sql", który został dostarczony wraz z aplikacją webową
-1. Na koniec kliknij przycisk "Import", aby zakończyć importowanie bazy danych
+1. Kliknij przycisk "Import", aby zakończyć importowanie bazy danych
+1. Usuń/Przenieś plik "zakladkidb.sql" z katalogu projektu
 
 # Instrukcja uruchomienia projektu
 1. Uruchom XAMPP Control Panel
 1. Upewnij się, że zostało wykonane przygotowanie systemu apache i systemu bazodanowego
-1. Naciśnij przycisk "Start" w wierszach odpowiadających serwerowi apache oraz systemowi bazodanowemu MySQL.
-1. Przejdź na adres [http://localhost/menadzerZakladek/](http://localhost/menadzerZakladek/)
+1. Naciśnij przycisk "Start" w wierszach odpowiadających serwerowi apache oraz systemowi bazodanowemu MySQL
+1. Przejdź na adres [http://localhost/MenadzerZakladek/](http://localhost/MenadzerZakladek/)
+
+# Instrukcja wyłączenia projektu
+1. Naciśnij przycisk "Stop"  w wierszach odpowiadających serwerowi apache oraz systemowi bazodanowemu MySQL
+1. Wyłącz XAMPP Control Panel
