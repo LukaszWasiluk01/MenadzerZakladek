@@ -9,7 +9,8 @@ Projekt indywidualny "Menadżer zakładek" wykonany na przedmiot "Podstawy techn
 
 1. Uruchom XAMPP Control Panel
 1. Naciśnij przycisk z napisem "Explorer", który otworzy eksplorator plików
-1. Odszukaj katalog htdocs i sklonuj repozytorium z projektem za pomocą komendy:
+1. Odszukaj katalog htdocs, skopiuj ścieżkę, a następnie przejdź do niego w wierszu poleceń
+1.  Sklonuj repozytorium z projektem za pomocą komendy:
 ```bash
 git clone https://github.com/LukaszWasiluk01/MenadzerZakladek.git
 ```
