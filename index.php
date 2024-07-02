@@ -1,3 +1,6 @@
+<?php
+require("db.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,26 +12,55 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <a href="index.php">Moje zakładki</a>
-            <div class="dropdown">
-                <button class="dropbtn">Nazwa_uzytkownika</button>
-                <div class="dropdown-content">
-                    <a href="grupy-zakladek.php">Moje grupy zakladek</a>
-                    <a href="znajomi.php">Znajomi</a>
-                    <a href="zaproszenia.php">Oczekujące zaproszenia</a>
-                    <a href="preferencje.php">Moje preferencje</a>
-                    <a href="logout.php">Wyloguj</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
+    <?php
+    require("menu.php");
+    ?>
+    <main class="text-center">
+        <h1>Moje zakładki</h1>
+        <div class="center-80">
+            <?php
+            $sql = "SELECT id, nazwa FROM kategorie";
+            $result = $conn->query($sql);
+            echo "<a href='index.php'>Wszyskie</a>";
+            while ($row = $result->fetch_object()) {
+                echo " <a href='index.php?idKat={$row->id}'>{$row->nazwa}</a>";
+            }
+            ?>
+            <form>
+                <p>
+                    <input type="text" name="fraza">
+                    <input type="submit" value="Wyszukaj">
+                </p>
+            </form>
+            <?php
+            $sql = "SELECT id, url, opis FROM zakladki";
+            if (isset($_GET["idKat"])) {
+                $idKat = $_GET["idKat"];
+                $sql .= " WHERE idKategorii = $idKat";
+            } elseif (isset($_GET["fraza"])) {
+                $fraza = $_GET["fraza"];
+                $sql .= " WHERE opis LIKE '%$fraza%'";
+            }
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                echo "<table>";
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>";
+                    echo "<td>{$row['opis']}</td>";
+                    echo "<td><a href={$row['url']} target='_blank'>Przejdź do linku</a></td>";
+                    echo "</tr>";
+                }
+                echo "</table>";
+            } else {
+                echo "Nie znaleziono żadnych zakładek.";
+            }
+            ?>
+        </div>
     </main>
-    <footer>
-        <p>&copy; 2024 Łukasz Wasiluk</p>
-    </footer>
+    <?php
+    require("footer.php");
+    ?>
 </body>
 
 </html>

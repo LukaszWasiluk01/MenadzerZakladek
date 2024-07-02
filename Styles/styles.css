@@ -1,6 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
+    background-color: silver;
 }
 
 .navbar {
@@ -62,4 +63,20 @@ body {
 
 .dropdown:hover .dropdown-content {
     display: block;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+    margin: 0 auto;
+}
+
+.center-80 {
+    width: 80%;
+    margin: auto;
+}
+
+.text-center {
+    text-align: center;
 }
