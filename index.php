@@ -49,6 +49,12 @@ require("db.php");
                     echo "<tr>";
                     echo "<td>{$row['opis']}</td>";
                     echo "<td><a href={$row['url']} target='_blank'>Przejdź do linku</a></td>";
+                    echo "<td>";
+                    echo "<form method='POST' action='delete.php'>";
+                    echo "<input type='hidden' name='idZakladki' value='{$row['id']}'>";
+                    echo "<input type='submit' value='Usuń zakładkę'>";
+                    echo "</form>";
+                    echo "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
