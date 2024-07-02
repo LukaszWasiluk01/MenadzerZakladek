@@ -17,7 +17,7 @@ require("db.php");
     ?>
     <main class="text-center">
         <h1>Dodaj zakładkę</h1>
-        <form action="update.php" method="POST">
+        <form action="insert.php" method="POST">
             <p>
                 <label for="opis">Opis:</label>
                 <textarea id="opis" name="opis" cols="30" rows="10"></textarea>
