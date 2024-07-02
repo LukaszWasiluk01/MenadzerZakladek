@@ -41,6 +41,16 @@ require("db.php");
                 $fraza = $_GET["fraza"];
                 $sql .= " WHERE opis LIKE '%$fraza%'";
             }
+            if (isset($_GET["page"])) {
+                $page  = $_GET["page"];
+            } else {
+                $page = 1;
+            }
+
+            $limit = 20;
+            $page_index = ($page - 1) * $limit;
+            $sqlToCountRecords = str_replace("id, url, opis", "count(*)", $sql);
+            $sql .= " LIMIT $page_index, $limit";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
@@ -58,9 +68,30 @@ require("db.php");
                     echo "</tr>";
                 }
                 echo "</table>";
+
+                $result = $conn->query($sqlToCountRecords);
+                $numberOfRecords = $result->fetch_row()[0];
+                $total_pages = ceil($numberOfRecords / $limit);
+                $params = $_GET;
+                echo "<div class='pagination'>";
+                if ($page >= 2) {
+                    $params['page'] = ($page - 1);
+                    $new_query_string = http_build_query($params);
+                    echo "<a href='index.php?" . $new_query_string . "'>Poprzednia strona</a>";
+                }
+
+                echo "Strona $page z $total_pages";
+
+                if ($page < $total_pages) {
+                    unset($params['page']);
+                    $params['page'] = ($page + 1);
+                    $new_query_string = http_build_query($params);
+                    echo "<a href='index.php?" . $new_query_string . "'>Następna strona</a>";
+                }
             } else {
                 echo "Nie znaleziono żadnych zakładek.";
             }
+            echo "</div>";
             ?>
         </div>
     </main>
