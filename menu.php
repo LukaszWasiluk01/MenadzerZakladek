@@ -5,6 +5,7 @@ require("db.php");
     <nav class="navbar">
         <div class="center-80">
             <a href="index.php">Moje zakładki</a>
+            <a href="insertForm.php">Dodaj zakładkę</a>
             <div class="dropdown">
                 <button class="dropbtn">Nazwa_uzytkownika</button>
                 <div class="dropdown-content">
