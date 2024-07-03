@@ -1,5 +1,6 @@
 <?php
 require("db.php");
+require("session.php");
 ?>
 <header>
     <nav class="navbar">
@@ -7,7 +8,7 @@ require("db.php");
             <a href="index.php">Moje zakładki</a>
             <a href="insertForm.php">Dodaj zakładkę</a>
             <div class="dropdown">
-                <button class="dropbtn">Nazwa_uzytkownika</button>
+                <button class="dropbtn"><?= $_SESSION["login"] ?></button>
                 <div class="dropdown-content">
                     <a href="grupy-zakladek.php">Moje grupy zakladek</a>
                     <a href="znajomi.php">Znajomi</a>
