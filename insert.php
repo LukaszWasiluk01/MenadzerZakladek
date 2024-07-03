@@ -1,6 +1,6 @@
 <?php
 /* TO DO
-$conn = new mysqli("localhost", "root", "", "zakladkidb");
+require("db.php");
 $idUzytkownika = // to do
 $idKategorii = $_POST["idKategorii"];
 $opis = $_POST["opis"];

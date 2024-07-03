@@ -1,5 +1,5 @@
 <?php
-$conn = new mysqli("localhost", "root", "", "zakladkidb");
+require("db.php");
 $id = $_POST["id"];
 $idKategorii = $_POST["idKategorii"];
 $opis = $_POST["opis"];
