@@ -22,6 +22,7 @@ require("db.php");
         $sql = "SELECT id, idKategorii, url, opis FROM zakladki WHERE id=$idZakladki";
         $result = $conn->query($sql);
         $row = $result->fetch_object();
+        $idKategorii = $row->idKategorii;
         ?>
         <form action="update.php" method="POST">
             <input type="hidden" name="id" value="<?= $row->id ?>">
@@ -40,7 +41,12 @@ require("db.php");
                     $sql = "SELECT id, nazwa FROM kategorie";
                     $result = $conn->query($sql);
                     while ($row = $result->fetch_object()) {
-                        echo "<option value='{$row->id}'>{$row->nazwa}</option>";
+                        $output = "<option value='{$row->id}'";
+                        if ($row->id === $idKategorii) {
+                            $output .= " selected";
+                        }
+                        $output .= ">" . $row->nazwa . "</option>";
+                        echo  $output;
                     }
                     ?>
                 </select>

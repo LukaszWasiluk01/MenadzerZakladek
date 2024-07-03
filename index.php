@@ -30,13 +30,13 @@
                 </p>
             </form>
             <?php
-            $sql = "SELECT id, url, opis FROM zakladki";
+            $sql = "SELECT id, url, opis FROM zakladki WHERE idUzytkownika = {$_SESSION['id']}";
             if (isset($_GET["idKat"])) {
                 $idKat = $_GET["idKat"];
-                $sql .= " WHERE idKategorii = $idKat";
+                $sql .= " AND idKategorii = $idKat";
             } elseif (isset($_GET["fraza"])) {
                 $fraza = $_GET["fraza"];
-                $sql .= " WHERE opis LIKE '%$fraza%'";
+                $sql .= " AND opis LIKE '%$fraza%'";
             }
             if (isset($_GET["page"])) {
                 $page  = $_GET["page"];

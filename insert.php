@@ -1,7 +1,7 @@
 <?php
-/* TO DO
 require("db.php");
-$idUzytkownika = // to do
+require("session.php");
+$idUzytkownika = $_SESSION['id'];
 $idKategorii = $_POST["idKategorii"];
 $opis = $_POST["opis"];
 $url = $_POST["url"];
@@ -9,5 +9,4 @@ $url = $_POST["url"];
 $sql = "INSERT INTO zakladki (idKategorii, idUzytkownika, opis, url) VALUES ('$idKategorii', '$idUzytkownika', '$opis', '$url')";
 $conn->query($sql);
 $conn->close();
-*/
 header("location: index.php");
