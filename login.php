@@ -22,8 +22,10 @@ require("db.php");
             $sql = "SELECT * FROM uzytkownicy WHERE login='$login' AND haslo='" . md5($haslo) . "'";
             $result = $conn->query($sql);
             if ($result->num_rows == 1) {
+                $user = $result->fetch_object();
                 $_SESSION["login"] = $login;
-                $_SESSION["id"] = $result->fetch_object()->id;
+                $_SESSION["id"] = $user->id;
+                $_SESSION["awatar"] = $user->awatar;
                 header("Location: index.php");
             } else {
                 echo "<div class='form'>

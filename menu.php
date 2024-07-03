@@ -8,7 +8,7 @@ require("session.php");
             <a href="index.php">Moje zakładki</a>
             <a href="insertForm.php">Dodaj zakładkę</a>
             <div class="dropdown">
-                <button class="dropbtn"><?= $_SESSION["login"] ?></button>
+                <button class="dropbtn"><?= $_SESSION["login"] ?><img src="./Images/<?= $_SESSION["awatar"] ?>" alt="Avatar" class="avatar"></button>
                 <div class="dropdown-content">
                     <a href="grupy-zakladek.php">Moje grupy zakladek</a>
                     <a href="znajomi.php">Znajomi</a>
