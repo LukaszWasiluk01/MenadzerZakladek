@@ -16,46 +16,47 @@ require("db.php");
     require("menu.php");
     ?>
     <main class="text-center">
-        <h1>Edytuj zakładkę</h1>
-        <?php
-        $idZakladki = $_GET["idZakladki"];
-        $sql = "SELECT id, idKategorii, url, opis FROM zakladki WHERE id=$idZakladki";
-        $result = $conn->query($sql);
-        $row = $result->fetch_object();
-        $idKategorii = $row->idKategorii;
-        ?>
-        <form action="update.php" method="POST">
-            <input type="hidden" name="id" value="<?= $row->id ?>">
-            <p>
-                <label for="opis">Opis:</label>
-                <textarea id="opis" name="opis" cols="30" rows="10"><?= $row->opis ?></textarea>
-            </p>
-            <p>
-                <label for="url">Url:</label>
-                <textarea id="url" name="url" cols="30" rows="10"><?= $row->url ?></textarea>
-            </p>
-            <p>
-                <label for="idKategorii">Kategoria:</label>
-                <select id="idKategorii" name="idKategorii" required>
-                    <?php
-                    $sql = "SELECT id, nazwa FROM kategorie";
-                    $result = $conn->query($sql);
-                    while ($row = $result->fetch_object()) {
-                        $output = "<option value='{$row->id}'";
-                        if ($row->id === $idKategorii) {
-                            $output .= " selected";
+        <div class="form-center-30">
+            <h1>Edytuj zakładkę</h1>
+            <?php
+            $idZakladki = $_GET["idZakladki"];
+            $sql = "SELECT id, idKategorii, url, opis FROM zakladki WHERE id=$idZakladki";
+            $result = $conn->query($sql);
+            $row = $result->fetch_object();
+            $idKategorii = $row->idKategorii;
+            ?>
+            <form action="update.php" method="POST">
+                <input type="hidden" name="id" value="<?= $row->id ?>">
+                <p><label for="opis">Opis</label></p>
+                <p>
+                    <textarea id="opis" name="opis" cols="30" rows="10"><?= $row->opis ?></textarea>
+                </p>
+                <p><label for="url">URL</label></p>
+                <p>
+                    <textarea id="url" name="url" cols="30" rows="10"><?= $row->url ?></textarea>
+                </p>
+                <p>
+                    <label for="idKategorii">Kategoria:</label>
+                    <select id="idKategorii" name="idKategorii" required>
+                        <?php
+                        $sql = "SELECT id, nazwa FROM kategorie";
+                        $result = $conn->query($sql);
+                        while ($row = $result->fetch_object()) {
+                            $output = "<option value='{$row->id}'";
+                            if ($row->id === $idKategorii) {
+                                $output .= " selected";
+                            }
+                            $output .= ">" . $row->nazwa . "</option>";
+                            echo  $output;
                         }
-                        $output .= ">" . $row->nazwa . "</option>";
-                        echo  $output;
-                    }
-                    ?>
-                </select>
-            </p>
-            <p>
-                <input type="submit" value="Zapisz zmiany">
-            </p>
-        </form>
-        <a href="index.php">Anuluj i wróć do listy swoich zakładek</a>
+                        ?>
+                    </select>
+                </p>
+                <p>
+                    <input type="submit" value="Zapisz zmiany" class="button update-btn">
+                </p>
+            </form>
+            <a href="index.php" class="button delete-btn">Anuluj i wróć do listy swoich zakładek</a>
         </div>
     </main>
     <?php

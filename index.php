@@ -18,15 +18,15 @@
             <?php
             $sql = "SELECT id, nazwa FROM kategorie";
             $result = $conn->query($sql);
-            echo "<a href='index.php'>Wszyskie</a>";
+            echo "<a href='index.php' class='filter-link'>Wszyskie</a>";
             while ($row = $result->fetch_object()) {
-                echo " <a href='index.php?idKat={$row->id}'>{$row->nazwa}</a>";
+                echo " <a href='index.php?idKat={$row->id}' class='filter-link'>{$row->nazwa}</a>";
             }
             ?>
             <form>
                 <p>
                     <input type="text" name="fraza">
-                    <input type="submit" value="Wyszukaj">
+                    <button type="submit" class="search-button">Wyszukaj</button>
                 </p>
             </form>
             <?php
@@ -52,19 +52,26 @@
 
             if ($result->num_rows > 0) {
                 echo "<table>";
+                echo "<thead>";
+                echo "<th>Opis zakładki</th>";
+                echo "<th>Link do adresu URL zakładki</th>";
+                echo "<th>Link do edycji zakładki</th>";
+                echo "<th>Link do usunięcia zakładki</th>";
+                echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>{$row['opis']}</td>";
-                    echo "<td><a href={$row['url']} target='_blank'>Przejdź do linku</a></td>";
-                    echo "<td><a href='updateForm.php?idZakladki={$row['id']}'>Edytuj zakładkę</a></td>";
+                    echo "<td><a href={$row['url']} target='_blank' class='button succes-btn'>Przejdź do linku</a></td>";
+                    echo "<td><a href='updateForm.php?idZakladki={$row['id']}' class='button update-btn'>Edytuj zakładkę</a></td>";
                     echo "<td>";
                     echo "<form method='POST' action='delete.php'>";
                     echo "<input type='hidden' name='idZakladki' value='{$row['id']}'>";
-                    echo "<input type='submit' value='Usuń zakładkę'>";
+                    echo "<input type='submit' value='Usuń zakładkę' class='button delete-btn'>";
                     echo "</form>";
                     echo "</td>";
                     echo "</tr>";
                 }
+                echo "</tbody>";
                 echo "</table>";
 
                 $result = $conn->query($sqlToCountRecords);

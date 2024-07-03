@@ -14,7 +14,7 @@ body {
     font-size: 16px;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 32px 16px;
     text-decoration: none;
 }
 
@@ -65,16 +65,17 @@ body {
     display: block;
 }
 
-table,
-th,
-td {
-    border: 1px solid black;
-    margin: 0 auto;
-}
-
 .center-80 {
     width: 80%;
     margin: auto;
+}
+
+.form-center-30 {
+    width: 30%;
+    margin: 20px auto;
+    border-radius: 10%;
+    padding: 10px;
+    background-color: #E8E8E8;
 }
 
 .text-center {
@@ -154,7 +155,89 @@ h1.login-title {
 
 .avatar {
     vertical-align: middle;
-    width: 50px;
-    height: 50px;
+    width: auto;
+    height: 54px;
     border-radius: 50%;
+}
+
+.filter-link {
+    text-decoration: none;
+}
+
+.filter-link:hover {
+    color: green;
+}
+
+.search-button {
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background: #ccc;
+}
+
+table {
+    font-family: Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: red;
+    color: white;
+}
+
+.button {
+    font: bold 14px;
+    text-decoration: none;
+    background-color: #EEEEEE;
+    color: #333333;
+    padding: 4px 12px 4px 12px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: 1px solid #CCCCCC;
+}
+
+.delete-btn {
+    background-color: #FFC0C0;
+}
+
+.delete-btn:hover {
+    background-color: #FF8080;
+}
+
+.update-btn {
+    background-color: #ADD8E6;
+}
+
+.update-btn:hover {
+    background-color: #6CA6C4;
+}
+
+.succes-btn {
+    background-color: #90EE90;
+}
+
+.succes-btn:hover {
+    background-color: #5CA55C;
 }
