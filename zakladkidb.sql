@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 02, 2024 at 07:51 PM
+-- Generation Time: Lip 03, 2024 at 03:59 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -49,16 +49,8 @@ INSERT INTO `kategorie` (`id`, `nazwa`) VALUES
 
 CREATE TABLE `kolekcjaprawa` (
   `idKolekcjaZakladek` int(10) UNSIGNED NOT NULL,
-  `idUzytkownika` int(10) UNSIGNED NOT NULL,
-  `tylkoOdczyt` tinyint(1) NOT NULL DEFAULT 1
+  `idUzytkownika` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `kolekcjaprawa`
---
-
-INSERT INTO `kolekcjaprawa` (`idKolekcjaZakladek`, `idUzytkownika`, `tylkoOdczyt`) VALUES
-(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -72,13 +64,6 @@ CREATE TABLE `kolekcjazakladek` (
   `nazwa` varchar(64) NOT NULL,
   `opis` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `kolekcjazakladek`
---
-
-INSERT INTO `kolekcjazakladek` (`id`, `idUzytkownika`, `nazwa`, `opis`) VALUES
-(1, 2, 'Strony z filmami', 'To są wszystkie znane mi strony z filmami.');
 
 -- --------------------------------------------------------
 
@@ -99,8 +84,8 @@ CREATE TABLE `preferencje` (
 --
 
 INSERT INTO `preferencje` (`idUzytkownika`, `rozmiarCzcionki`, `czyCiemneTlo`, `czyPrywatny`, `czyTylkoZnajomi`) VALUES
-(1, 16, 0, 0, 0),
-(2, 16, 0, 0, 0);
+(3, 16, 0, 0, 0),
+(4, 16, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -123,8 +108,8 @@ CREATE TABLE `uzytkownicy` (
 --
 
 INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `rola`, `utworzonyData`, `awatar`) VALUES
-(1, 'admin', 'admin', 'admin@example.com', 'admin', '2024-07-02 17:41:23', 'admin.jpg'),
-(2, 'test', 'test', 'test@example.com', 'user', '2024-07-02 17:41:47', 'test.jpg');
+(3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@example.com', 'user', '2024-07-03 12:16:45', 'testawatar.png'),
+(4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@example.com', 'user', '2024-07-03 12:19:17', 'adminawatar.webp');
 
 -- --------------------------------------------------------
 
@@ -136,13 +121,6 @@ CREATE TABLE `zakladkakolekcji` (
   `idKolekcjaZakladek` int(10) UNSIGNED NOT NULL,
   `idZakladki` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `zakladkakolekcji`
---
-
-INSERT INTO `zakladkakolekcji` (`idKolekcjaZakladek`, `idZakladki`) VALUES
-(1, 2);
 
 -- --------------------------------------------------------
 
@@ -163,8 +141,9 @@ CREATE TABLE `zakladki` (
 --
 
 INSERT INTO `zakladki` (`id`, `idUzytkownika`, `idKategorii`, `url`, `opis`) VALUES
-(1, 2, 1, 'https://www.youtube.com/', 'Strona główna youtube'),
-(2, 1, 2, 'https://www.netflix.com/pl/', 'Strona główna netflixa');
+(1, 3, 1, 'https://www.youtube.com/', 'Strona główna youtube'),
+(2, 4, 2, 'https://www.netflix.com/pl/', 'Strona główna netflixa'),
+(4, 3, 3, 'blogz.com/blogi.php', 'blogi');
 
 -- --------------------------------------------------------
 
@@ -184,7 +163,7 @@ CREATE TABLE `zgłoszenia` (
 --
 
 INSERT INTO `zgłoszenia` (`id`, `idUzytkownika`, `tresc`, `data`) VALUES
-(1, 2, 'Brakuje kategorii!', '2024-07-02 17:44:54');
+(1, 3, 'Brakuje kategorii!', '2024-07-02 17:44:54');
 
 -- --------------------------------------------------------
 
@@ -196,14 +175,6 @@ CREATE TABLE `znajomi` (
   `idUzytkownika1` int(10) UNSIGNED NOT NULL,
   `idUzytkownika2` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `znajomi`
---
-
-INSERT INTO `znajomi` (`idUzytkownika1`, `idUzytkownika2`) VALUES
-(1, 2),
-(2, 1);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -290,13 +261,13 @@ ALTER TABLE `kolekcjazakladek`
 -- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `zakladki`
 --
 ALTER TABLE `zakladki`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `zgłoszenia`
