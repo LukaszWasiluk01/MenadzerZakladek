@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 03, 2024 at 03:59 PM
+-- Generation Time: Lip 04, 2024 at 02:44 AM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -44,52 +44,6 @@ INSERT INTO `kategorie` (`id`, `nazwa`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `kolekcjaprawa`
---
-
-CREATE TABLE `kolekcjaprawa` (
-  `idKolekcjaZakladek` int(10) UNSIGNED NOT NULL,
-  `idUzytkownika` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `kolekcjazakladek`
---
-
-CREATE TABLE `kolekcjazakladek` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `idUzytkownika` int(10) UNSIGNED NOT NULL,
-  `nazwa` varchar(64) NOT NULL,
-  `opis` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `preferencje`
---
-
-CREATE TABLE `preferencje` (
-  `idUzytkownika` int(10) UNSIGNED NOT NULL,
-  `rozmiarCzcionki` int(11) NOT NULL DEFAULT 16,
-  `czyCiemneTlo` tinyint(1) NOT NULL DEFAULT 0,
-  `czyPrywatny` tinyint(1) NOT NULL DEFAULT 0,
-  `czyTylkoZnajomi` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
-
---
--- Dumping data for table `preferencje`
---
-
-INSERT INTO `preferencje` (`idUzytkownika`, `rozmiarCzcionki`, `czyCiemneTlo`, `czyPrywatny`, `czyTylkoZnajomi`) VALUES
-(3, 16, 0, 0, 0),
-(4, 16, 0, 0, 0);
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `uzytkownicy`
 --
 
@@ -109,18 +63,8 @@ CREATE TABLE `uzytkownicy` (
 
 INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `rola`, `utworzonyData`, `awatar`) VALUES
 (3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@example.com', 'user', '2024-07-03 12:16:45', 'testawatar.png'),
-(4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@example.com', 'user', '2024-07-03 12:19:17', 'adminawatar.webp');
-
--- --------------------------------------------------------
-
---
--- Struktura tabeli dla tabeli `zakladkakolekcji`
---
-
-CREATE TABLE `zakladkakolekcji` (
-  `idKolekcjaZakladek` int(10) UNSIGNED NOT NULL,
-  `idZakladki` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+(4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@example.com', 'user', '2024-07-03 12:19:17', 'adminawatar.webp'),
+(5, 'test123', 'cc03e747a6afbbcbf8be7668acfebee5', 'test123@example.com', 'user', '2024-07-03 22:44:48', 'test123awatar.webp');
 
 -- --------------------------------------------------------
 
@@ -141,9 +85,9 @@ CREATE TABLE `zakladki` (
 --
 
 INSERT INTO `zakladki` (`id`, `idUzytkownika`, `idKategorii`, `url`, `opis`) VALUES
-(1, 3, 1, 'https://www.youtube.com/', 'Strona główna youtube'),
 (2, 4, 2, 'https://www.netflix.com/pl/', 'Strona główna netflixa'),
-(4, 3, 3, 'blogz.com/blogi.php', 'blogi');
+(4, 3, 3, 'blogz.com/blogi.php', 'blogi'),
+(8, 5, 1, 'test123.com', 'test123');
 
 -- --------------------------------------------------------
 
@@ -177,6 +121,14 @@ CREATE TABLE `znajomi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
+-- Dumping data for table `znajomi`
+--
+
+INSERT INTO `znajomi` (`idUzytkownika1`, `idUzytkownika2`) VALUES
+(3, 5),
+(5, 3);
+
+--
 -- Indeksy dla zrzutów tabel
 --
 
@@ -187,37 +139,10 @@ ALTER TABLE `kategorie`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeksy dla tabeli `kolekcjaprawa`
---
-ALTER TABLE `kolekcjaprawa`
-  ADD KEY `idKolekcjaZakladek` (`idKolekcjaZakladek`),
-  ADD KEY `idUzytkownika` (`idUzytkownika`);
-
---
--- Indeksy dla tabeli `kolekcjazakladek`
---
-ALTER TABLE `kolekcjazakladek`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idUzytkownika` (`idUzytkownika`);
-
---
--- Indeksy dla tabeli `preferencje`
---
-ALTER TABLE `preferencje`
-  ADD KEY `idUzytkownika` (`idUzytkownika`);
-
---
 -- Indeksy dla tabeli `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
   ADD PRIMARY KEY (`id`);
-
---
--- Indeksy dla tabeli `zakladkakolekcji`
---
-ALTER TABLE `zakladkakolekcji`
-  ADD KEY `idKolekcjaZakladek` (`idKolekcjaZakladek`),
-  ADD KEY `idZakladki` (`idZakladki`);
 
 --
 -- Indeksy dla tabeli `zakladki`
@@ -252,22 +177,16 @@ ALTER TABLE `kategorie`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `kolekcjazakladek`
---
-ALTER TABLE `kolekcjazakladek`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `zakladki`
 --
 ALTER TABLE `zakladki`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `zgłoszenia`
@@ -278,32 +197,6 @@ ALTER TABLE `zgłoszenia`
 --
 -- Constraints for dumped tables
 --
-
---
--- Constraints for table `kolekcjaprawa`
---
-ALTER TABLE `kolekcjaprawa`
-  ADD CONSTRAINT `kolekcjaprawa_ibfk_1` FOREIGN KEY (`idKolekcjaZakladek`) REFERENCES `kolekcjazakladek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `kolekcjaprawa_ibfk_2` FOREIGN KEY (`idUzytkownika`) REFERENCES `uzytkownicy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `kolekcjazakladek`
---
-ALTER TABLE `kolekcjazakladek`
-  ADD CONSTRAINT `kolekcjazakladek_ibfk_1` FOREIGN KEY (`idUzytkownika`) REFERENCES `uzytkownicy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `preferencje`
---
-ALTER TABLE `preferencje`
-  ADD CONSTRAINT `preferencje_ibfk_1` FOREIGN KEY (`idUzytkownika`) REFERENCES `uzytkownicy` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `zakladkakolekcji`
---
-ALTER TABLE `zakladkakolekcji`
-  ADD CONSTRAINT `zakladkakolekcji_ibfk_1` FOREIGN KEY (`idKolekcjaZakladek`) REFERENCES `kolekcjazakladek` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `zakladkakolekcji_ibfk_2` FOREIGN KEY (`idZakladki`) REFERENCES `zakladki` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `zakladki`
