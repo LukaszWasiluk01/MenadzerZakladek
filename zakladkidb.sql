@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 04, 2024 at 02:44 AM
+-- Generation Time: Lip 04, 2024 at 07:52 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -63,8 +63,9 @@ CREATE TABLE `uzytkownicy` (
 
 INSERT INTO `uzytkownicy` (`id`, `login`, `haslo`, `email`, `rola`, `utworzonyData`, `awatar`) VALUES
 (3, 'test', '098f6bcd4621d373cade4e832627b4f6', 'test@example.com', 'user', '2024-07-03 12:16:45', 'testawatar.png'),
-(4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@example.com', 'user', '2024-07-03 12:19:17', 'adminawatar.webp'),
-(5, 'test123', 'cc03e747a6afbbcbf8be7668acfebee5', 'test123@example.com', 'user', '2024-07-03 22:44:48', 'test123awatar.webp');
+(4, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'admin@example.com', 'admin', '2024-07-03 12:19:17', 'adminawatar.webp'),
+(5, 'test123', 'cc03e747a6afbbcbf8be7668acfebee5', 'test123@example.com', 'user', '2024-07-03 22:44:48', 'test123awatar.webp'),
+(6, 'test321', 'ee53d4213c897ad632bb8d824762f918', 'test321@example.com', 'user', '2024-07-04 14:21:32', 'test321awatar.png');
 
 -- --------------------------------------------------------
 
@@ -107,7 +108,8 @@ CREATE TABLE `zgłoszenia` (
 --
 
 INSERT INTO `zgłoszenia` (`id`, `idUzytkownika`, `tresc`, `data`) VALUES
-(1, 3, 'Brakuje kategorii!', '2024-07-02 17:44:54');
+(1, 3, 'Brakuje kategorii!', '2024-07-02 17:44:54'),
+(17, 4, 'test', '2024-07-04 11:33:54');
 
 -- --------------------------------------------------------
 
@@ -125,8 +127,11 @@ CREATE TABLE `znajomi` (
 --
 
 INSERT INTO `znajomi` (`idUzytkownika1`, `idUzytkownika2`) VALUES
+(5, 3),
 (3, 5),
-(5, 3);
+(4, 3),
+(5, 4),
+(3, 4);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -180,7 +185,7 @@ ALTER TABLE `kategorie`
 -- AUTO_INCREMENT for table `uzytkownicy`
 --
 ALTER TABLE `uzytkownicy`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `zakladki`
@@ -192,7 +197,7 @@ ALTER TABLE `zakladki`
 -- AUTO_INCREMENT for table `zgłoszenia`
 --
 ALTER TABLE `zgłoszenia`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables
