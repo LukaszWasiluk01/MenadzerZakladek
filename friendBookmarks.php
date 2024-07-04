@@ -13,24 +13,11 @@
     require("menu.php");
     ?>
     <main class="text-center">
-        <h1>Moje zakładki</h1>
+        <h1>Zakładki użytkownika <?= $_GET["login"] ?></h1>
         <div class="center-80">
             <?php
-            $sql = "SELECT id, nazwa FROM kategorie";
-            $result = $conn->query($sql);
-            echo "<a href='index.php' class='filter-link'>Wszyskie</a>";
-            while ($row = $result->fetch_object()) {
-                echo " <a href='index.php?idKat={$row->id}' class='filter-link'>{$row->nazwa}</a>";
-            }
-            ?>
-            <form>
-                <p>
-                    <input type="text" name="fraza">
-                    <button type="submit" class="search-button">Wyszukaj</button>
-                </p>
-            </form>
-            <?php
-            $sql = "SELECT id, url, opis FROM zakladki WHERE idUzytkownika = {$_SESSION['id']}";
+            require("isFriend.php");
+            $sql = "SELECT id, url, opis FROM zakladki WHERE idUzytkownika = {$_GET['idZnajomego']}";
             if (isset($_GET["idKat"])) {
                 $idKat = $_GET["idKat"];
                 $sql .= " AND idKategorii = $idKat";
@@ -55,19 +42,11 @@
                 echo "<thead>";
                 echo "<th>Opis zakładki</th>";
                 echo "<th>Link do adresu URL zakładki</th>";
-                echo "<th>Link do edycji zakładki</th>";
-                echo "<th>Link do usunięcia zakładki</th>";
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
                     echo "<td>{$row['opis']}</td>";
                     echo "<td><a href={$row['url']} target='_blank' class='button success-btn'>Przejdź do linku</a></td>";
-                    echo "<td><a href='updateForm.php?idZakladki={$row['id']}' class='button update-btn'>Edytuj zakładkę</a></td>";
-                    echo "<td>";
-                    echo "<form method='POST' action='delete.php'>";
-                    echo "<input type='hidden' name='idZakladki' value='{$row['id']}'>";
-                    echo "<input type='submit' value='Usuń zakładkę' class='button delete-btn'>";
-                    echo "</form>";
                     echo "</td>";
                     echo "</tr>";
                 }
@@ -82,7 +61,7 @@
                 if ($page >= 2) {
                     $params['page'] = ($page - 1);
                     $new_query_string = http_build_query($params);
-                    echo "<a class='button' href='index.php?" . $new_query_string . "'>Poprzednia strona</a>";
+                    echo "<a class='button' href='friendBookmarks.php?" . $new_query_string . "'>Poprzednia strona</a>";
                 }
 
                 echo "Strona $page z $total_pages";
@@ -91,7 +70,7 @@
                     unset($params['page']);
                     $params['page'] = ($page + 1);
                     $new_query_string = http_build_query($params);
-                    echo "<a class='button' href='index.php?" . $new_query_string . "'>Następna strona</a>";
+                    echo "<a class='button' href='friendBookmarks.php?" . $new_query_string . "'>Następna strona</a>";
                 }
             } else {
                 echo "Nie znaleziono żadnych zakładek.";
