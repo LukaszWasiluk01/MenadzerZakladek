@@ -14,14 +14,14 @@
     require("menu.php");
     ?>
     <main class="text-center">
-        <h1>Moi znajomi</h1>
+        <h1>Oczekujące zaproszenia</h1>
         <div class="center-80">
             <?php
             $sql = "SELECT uzytkownicy.id as id, uzytkownicy.login as login, uzytkownicy.awatar as awatar
                     FROM znajomi
-                    JOIN uzytkownicy ON znajomi.idUzytkownika2 = uzytkownicy.id
-                    WHERE idUzytkownika1 = {$_SESSION['id']}
-                    AND (idUzytkownika1, idUzytkownika2) IN (
+                    JOIN uzytkownicy ON znajomi.idUzytkownika1 = uzytkownicy.id
+                    WHERE idUzytkownika2 = {$_SESSION['id']}
+                    AND (idUzytkownika1, idUzytkownika2) NOT IN (
                         SELECT idUzytkownika2, idUzytkownika1 FROM znajomi
                     )
                     AND idUzytkownika1 <> idUzytkownika2";
@@ -33,21 +33,19 @@
                 echo "<thead>";
                 echo "<th>Awatar</th>";
                 echo "<th>Nazwa użytkownika</th>";
-                echo "<th>Link do zakładek znajomego</th>";
-                echo "<th>Link do usunięcia znajomego</th>";
+                echo "<th>Przycisk do akceptacji zaproszenia</th>";
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr id={$row['id']}>";
                     echo "<td><img src='./Images/{$row['awatar']}' alt='Avatar' class='avatar'></td>";
                     echo "<td>{$row['login']}</td>";
-                    echo "<td><a href='friendBookmarks.php?idZnajomego={$row['id']}&&login={$row['login']}' class='button success-btn'>Przejdz do zakladek znajomego</a></td>";
-                    echo "<td><button class='button delete-btn' data-id={$row['id']}>Usuń znajomego</button></td>";
+                    echo "<td><button class='button delete-btn' data-id={$row['id']}>Akceptuj zaproszenie</button></td>";
                     echo "</tr>";
                 }
                 echo "</tbody>";
                 echo "</table>";
             } else {
-                echo "Nie znaleziono żadnych znajomych.";
+                echo "Nie znaleziono oczekujących zaproszeń.";
             }
             echo "</div>";
             ?>
@@ -56,7 +54,7 @@
     <?php
     require("footer.php");
     ?>
-    <script src="./Scripts/friendsScript.js"></script>
+    <script src="./Scripts/friendRequestScript.js"></script>
 </body>
 
 </html>

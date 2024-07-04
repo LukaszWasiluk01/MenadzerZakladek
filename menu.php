@@ -11,7 +11,7 @@ require("session.php");
                 <button class="dropbtn"><?= $_SESSION["login"] ?><img src="./Images/<?= $_SESSION["awatar"] ?>" alt="Avatar" class="avatar"></button>
                 <div class="dropdown-content">
                     <a href="friends.php">Znajomi</a>
-                    <a href="zaproszenia.php">Oczekujące zaproszenia</a>
+                    <a href="friendRequest.php">Oczekujące zaproszenia</a>
                     <a href="logout.php">Wyloguj</a>
                 </div>
             </div>
