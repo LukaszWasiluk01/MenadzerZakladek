@@ -4,6 +4,10 @@ body {
     background-color: silver;
 }
 
+footer {
+    margin: 10px auto;
+}
+
 .navbar {
     overflow: hidden;
     background-color: #333;
