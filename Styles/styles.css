@@ -241,3 +241,7 @@ th {
 .success-btn:hover {
     background-color: #5CA55C;
 }
+
+.friendRequest{
+    margin: 1rem;
+}

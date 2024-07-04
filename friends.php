@@ -15,6 +15,10 @@
     ?>
     <main class="text-center">
         <h1>Moi znajomi</h1>
+        <div class="friendRequest">
+            <input type="text" id="loginZnajomego" placeholder="Wpisz login znajomego">
+            <button type="button" id="sendFriendRequest">Wyślij zaproszenie</button>
+        </div>
         <div class="center-80">
             <?php
             $sql = "SELECT uzytkownicy.id as id, uzytkownicy.login as login, uzytkownicy.awatar as awatar
