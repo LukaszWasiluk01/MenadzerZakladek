@@ -18,7 +18,7 @@
         <div class="center-80">
             <?php
             require("isFriend.php");
-            $sql = "SELECT id, url, opis FROM zakladki WHERE idUzytkownika = {$_GET['idZnajomego']}";
+            $sql = "SELECT id, url, opis, dataUtworzenia FROM zakladki WHERE idUzytkownika = {$_GET['idZnajomego']}";
             if (isset($_GET["idKat"])) {
                 $idKat = $_GET["idKat"];
                 $sql .= " AND idKategorii = $idKat";
@@ -26,13 +26,14 @@
                 $fraza = $_GET["fraza"];
                 $sql .= " AND opis LIKE '%$fraza%'";
             }
+            $sql .= " ORDER BY dataUtworzenia DESC";
             if (isset($_GET["page"])) {
                 $page  = $_GET["page"];
             } else {
                 $page = 1;
             }
 
-            $limit = 20;
+            $limit = 5;
             $page_index = ($page - 1) * $limit;
             $sqlToCountRecords = str_replace("id, url, opis", "count(*)", $sql);
             $sql .= " LIMIT $page_index, $limit";
@@ -41,11 +42,13 @@
             if ($result->num_rows > 0) {
                 echo "<table>";
                 echo "<thead>";
+                echo "<th>Data utworzenia</th>";
                 echo "<th>Opis zakładki</th>";
                 echo "<th>Link do adresu URL zakładki</th>";
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
+                    echo "<td>{$row['dataUtworzenia']}</td>";
                     echo "<td>{$row['opis']}</td>";
                     echo "<td><a href={$row['url']} target='_blank' class='button success-btn'>Przejdź do linku</a></td>";
                     echo "</td>";

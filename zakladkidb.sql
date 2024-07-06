@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Lip 04, 2024 at 07:52 PM
+-- Generation Time: Lip 06, 2024 at 11:27 PM
 -- Wersja serwera: 10.4.32-MariaDB
 -- Wersja PHP: 8.2.12
 
@@ -78,17 +78,27 @@ CREATE TABLE `zakladki` (
   `idUzytkownika` int(10) UNSIGNED NOT NULL,
   `idKategorii` int(10) UNSIGNED NOT NULL,
   `url` text NOT NULL,
-  `opis` text NOT NULL
+  `opis` text NOT NULL,
+  `dataUtworzenia` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Dumping data for table `zakladki`
 --
 
-INSERT INTO `zakladki` (`id`, `idUzytkownika`, `idKategorii`, `url`, `opis`) VALUES
-(2, 4, 2, 'https://www.netflix.com/pl/', 'Strona główna netflixa'),
-(4, 3, 3, 'blogz.com/blogi.php', 'blogi'),
-(8, 5, 1, 'test123.com', 'test123');
+INSERT INTO `zakladki` (`id`, `idUzytkownika`, `idKategorii`, `url`, `opis`, `dataUtworzenia`) VALUES
+(2, 4, 2, 'https://www.netflix.com/pl/', 'Strona główna netflixa', '2024-07-06 19:55:23'),
+(10, 4, 1, 'https://www.youtube.com/results?search_query=muzyka+playlista', 'Playlista muzyki', '2024-07-06 19:52:01'),
+(11, 4, 1, 'https://www.youtube.com/results?search_query=recenzje+nowych+film%C3%B3w', 'Recenzje nowych filmów', '2024-07-06 19:57:01'),
+(12, 4, 1, 'https://www.youtube.com/results?search_query=recenzje+gier', 'Recenzje gier', '2024-07-06 19:57:01'),
+(13, 4, 1, 'https://www.youtube.com/results?search_query=recenzje+film%C3%B3w', 'Recenzje filmów', '2024-07-06 19:58:33'),
+(14, 3, 1, 'https://www.youtube.com/results?search_query=Premiery+filmowe+2024', 'Premiery filmowe 2024', '2024-07-06 20:39:29'),
+(15, 3, 1, 'https://www.youtube.com/results?search_query=elden+ring', 'Elden ring', '2024-07-06 20:57:18'),
+(16, 4, 1, 'https://www.youtube.com/results?search_query=wied%C5%BAmin+3', 'Wiedźmin 3', '2024-07-06 20:58:07'),
+(17, 3, 1, 'https://www.youtube.com/results?search_query=recenzja+Last+Epoch', 'Recenzja Last Epoch', '2024-07-06 21:00:50'),
+(18, 3, 1, 'https://www.youtube.com/results?search_query=recenzja+Path+of+exile', 'Recenzja Path of Exile', '2024-07-06 21:01:47'),
+(19, 4, 1, 'https://www.youtube.com/results?search_query=recenzja+elden+ring+shadow+of+the+erdtree', 'Recenzja Elden Ring: Shadow of the Erdtree', '2024-07-06 21:03:33'),
+(20, 3, 1, 'https://www.youtube.com/results?search_query=euro+2024+highlights+today', 'euro 2024 highlights today', '2024-07-06 21:12:22');
 
 -- --------------------------------------------------------
 
@@ -129,9 +139,10 @@ CREATE TABLE `znajomi` (
 INSERT INTO `znajomi` (`idUzytkownika1`, `idUzytkownika2`) VALUES
 (5, 3),
 (3, 5),
-(4, 3),
 (5, 4),
-(3, 4);
+(4, 5),
+(3, 4),
+(4, 3);
 
 --
 -- Indeksy dla zrzutów tabel
@@ -191,7 +202,7 @@ ALTER TABLE `uzytkownicy`
 -- AUTO_INCREMENT for table `zakladki`
 --
 ALTER TABLE `zakladki`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `zgłoszenia`

@@ -31,7 +31,7 @@
                 </p>
             </form>
             <?php
-            $sql = "SELECT id, url, opis FROM zakladki WHERE idUzytkownika = {$_SESSION['id']}";
+            $sql = "SELECT id, url, opis, dataUtworzenia FROM zakladki WHERE idUzytkownika = {$_SESSION['id']}";
             if (isset($_GET["idKat"])) {
                 $idKat = $_GET["idKat"];
                 $sql .= " AND idKategorii = $idKat";
@@ -45,15 +45,17 @@
                 $page = 1;
             }
 
-            $limit = 20;
+            $limit = 5;
             $page_index = ($page - 1) * $limit;
-            $sqlToCountRecords = str_replace("id, url, opis", "count(*)", $sql);
+            $sqlToCountRecords = str_replace("id, url, opis, dataUtworzenia", "count(*)", $sql);
+            $sql .= " ORDER BY dataUtworzenia DESC";
             $sql .= " LIMIT $page_index, $limit";
             $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
                 echo "<table>";
                 echo "<thead>";
+                echo "<th>Data utworzenia</th>";
                 echo "<th>Opis zakładki</th>";
                 echo "<th>Link do adresu URL zakładki</th>";
                 echo "<th>Link do edycji zakładki</th>";
@@ -61,6 +63,7 @@
                 echo "<tbody>";
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>";
+                    echo "<td>{$row['dataUtworzenia']}</td>";
                     echo "<td>{$row['opis']}</td>";
                     echo "<td><a href={$row['url']} target='_blank' class='button success-btn'>Przejdź do linku</a></td>";
                     echo "<td><a href='updateForm.php?idZakladki={$row['id']}' class='button update-btn'>Edytuj zakładkę</a></td>";
