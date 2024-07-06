@@ -7,6 +7,7 @@ require("isAdmin.php");
     <nav class="navbar">
         <div class="center-80">
             <a href="index.php">Moje zakładki</a>
+            <a href="friendsBookmarks.php">Zakładki znajomych</a>
             <a href="insertForm.php">Dodaj zakładkę</a>
             <?php
             if ($isAdmin === true) {
